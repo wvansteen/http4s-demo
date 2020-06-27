@@ -1,0 +1,3 @@
+[0m[[0m[0mdebug[0m] [0m[0mCopy resource mappings: [0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/Users/williamv/Documents/projects/uscis/http4sdemo/src/main/resources/logback.xml,/Users/williamv/Documents/projects/uscis/http4sdemo/target/scala-2.13/classes/logback.xml)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/Users/williamv/Documents/projects/uscis/http4sdemo/src/main/resources/META-INF/native-image/com/example/http4sdemo/reflect-config.json,/Users/williamv/Documents/projects/uscis/http4sdemo/target/scala-2.13/classes/META-INF/native-image/com/example/http4sdemo/reflect-config.json)[0m
