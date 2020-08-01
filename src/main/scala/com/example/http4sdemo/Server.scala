@@ -2,37 +2,21 @@ package com.example.http4sdemo
 
 import scala.concurrent.ExecutionContext.global
 
+import cats.effect.ExitCode
 import cats.effect.{ConcurrentEffect, Timer}
-import cats.implicits._
+import com.example.http4sdemo.config.ServerConfig
 import fs2.Stream
-import org.http4s.client.blaze.BlazeClientBuilder
-import org.http4s.implicits._
 import org.http4s.server.blaze.BlazeServerBuilder
 import org.http4s.server.middleware.Logger
 
 object Server {
 
-  def stream[F[_]: ConcurrentEffect](implicit
-      T: Timer[F]
-  ): Stream[F, Nothing] = {
-    for {
-      client <- BlazeClientBuilder[F](global).stream
-      //helloWorldAlg = HelloWorld.impl[F]
-      //jokeAlg = Jokes.impl[F](client)
+  def stream[F[_]: ConcurrentEffect: Timer](serverConfig: ServerConfig): Stream[F, ExitCode] = {
+    val httpApp = Logger.httpApp(true, true)(Routes())
 
-      // Combine Service Routes into an HttpApp.
-      // Can also be done via a Router if you
-      // want to extract a segments not checked
-      // in the underlying routes.
-      httpApp = Routes()
-
-      // With Middlewares in place
-      finalHttpApp = Logger.httpApp(true, true)(httpApp)
-
-      exitCode <- BlazeServerBuilder[F](global)
-        .bindHttp(8080, "0.0.0.0")
-        .withHttpApp(finalHttpApp)
-        .serve
-    } yield exitCode
-  }.drain
+    BlazeServerBuilder[F](global)
+      .bindHttp(serverConfig.port, serverConfig.host)
+      .withHttpApp(httpApp)
+      .serve
+  }
 }
