@@ -10,24 +10,21 @@ import org.http4s.implicits._
 import org.http4s.server.blaze.BlazeServerBuilder
 import org.http4s.server.middleware.Logger
 
-object Http4sdemoServer {
+object Server {
 
   def stream[F[_]: ConcurrentEffect](implicit
       T: Timer[F]
   ): Stream[F, Nothing] = {
     for {
       client <- BlazeClientBuilder[F](global).stream
-      helloWorldAlg = HelloWorld.impl[F]
-      jokeAlg = Jokes.impl[F](client)
+      //helloWorldAlg = HelloWorld.impl[F]
+      //jokeAlg = Jokes.impl[F](client)
 
       // Combine Service Routes into an HttpApp.
       // Can also be done via a Router if you
       // want to extract a segments not checked
       // in the underlying routes.
-      httpApp = (
-          Http4sdemoRoutes.helloWorldRoutes[F](helloWorldAlg) <+>
-            Http4sdemoRoutes.jokeRoutes[F](jokeAlg)
-      ).orNotFound
+      httpApp = Routes()
 
       // With Middlewares in place
       finalHttpApp = Logger.httpApp(true, true)(httpApp)
