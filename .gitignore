@@ -1,3 +1,7 @@
 # IDE
 .metals
 .bloop
+
+# Build output
+target
+project/project
