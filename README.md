@@ -6,10 +6,15 @@ Most ideas of what need to happen are in [TODO](./TODO.md)
 
 ## Local Development
 
-start sbt `sbt`
+### Requires Docker
+
+start sbt in the docker container `docker-compose run --service-ports --rm app sbt`
+
+### From inside of sbt
 
 run the app with hot reloading `~reStart`
 
 to stop the app `reStop`
 
-To lint `sbt scalafix`
+to run the database migrations `flywayMigrate`
+To lint `scalafix`

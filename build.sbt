@@ -10,7 +10,7 @@ val DoobieVersion = "0.8.8"
 organization := "com.example"
 name := "http4sdemo"
 version := "0.0.1-SNAPSHOT"
-scalaVersion := "2.13.1"
+scalaVersion := "2.13.3"
 libraryDependencies ++= Seq(
   "org.http4s" %% "http4s-blaze-server" % Http4sVersion,
   "org.http4s" %% "http4s-blaze-client" % Http4sVersion,
@@ -21,29 +21,31 @@ libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % LogbackVersion,
   "com.github.pureconfig" %% "pureconfig" % PureConfigVersion,
   "com.github.pureconfig" %% "pureconfig-cats-effect" % PureConfigVersion,
-  "com.h2database" % "h2" % H2Version,
   "org.tpolecat" %% "doobie-core" % DoobieVersion,
   "org.tpolecat" %% "doobie-h2" % DoobieVersion,
-  "org.tpolecat" %% "doobie-hikari" % DoobieVersion
+  "org.tpolecat" %% "doobie-hikari" % DoobieVersion,
+  "org.tpolecat" %% "doobie-postgres" % DoobieVersion
 )
 
 enablePlugins(FlywayPlugin)
 
 flywayLocations += "migrations"
 
-flywayUrl := "jdbc:h2:mem:todo;MODE=PostgreSQL;DB_CLOSE_DELAY=-1"
-flywayUser := "SA"
-flywayPassword := ""
+flywayUrl := "jdbc:postgresql://postgres/doobie"
+flywayUser := "doobie"
+flywayPassword := "doobie"
+flywayLocations += "migrations"
 
-flywayUrl in Test := "jdbc:h2:mem:todo;MODE=PostgreSQL;DB_CLOSE_DELAY=-1"
-flywayUser in Test := "SA"
-flywayPassword in Test := ""
+flywayUrl in Test := "jdbc:postgresql://postgres/doobie"
+flywayUser in Test := "doobie"
+flywayPassword in Test := "doobie"
 
 addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3")
 addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1")
 addCompilerPlugin(scalafixSemanticdb)
 
 ThisBuild / scalafixDependencies += "com.nequissimus" %% "sort-imports" % "0.5.4"
+Global / onChangedBuildSource := ReloadOnSourceChanges
 
 scalacOptions ++= Seq(
   "-deprecation",
