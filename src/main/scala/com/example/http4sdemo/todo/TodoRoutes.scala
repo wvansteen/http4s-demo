@@ -7,6 +7,12 @@ import io.circe.syntax._
 import org.http4s.circe._
 import org.http4s.rho.RhoRoutes
 import org.http4s.rho.swagger.SwaggerSyntax
+import io.circe.Encoder
+import io.circe.Decoder
+import io.circe.DecodingFailure
+import com.example.http4sdemo.model.Error.ImportanceParseError
+import io.circe.HCursor
+import io.circe.Decoder.Result
 
 class TodoRoutes[F[+_]: Async](repository: TodoRepository[F], swaggerSyntax: SwaggerSyntax[F])
     extends RhoRoutes[F] {
@@ -16,6 +22,19 @@ class TodoRoutes[F[+_]: Async](repository: TodoRepository[F], swaggerSyntax: Swa
   val getTodos = "todo" @@ GET / "todo"
 
   val todoIdPathParameter = pathVar[Long]("todo-id", "id of the requested todo")
+
+  private implicit val encodeImportance: Encoder[Importance] =
+    Encoder.encodeString.contramap[Importance](_.toString())
+  private implicit val decodeImportance: Decoder[Importance] = new Decoder[Importance] {
+    final def apply(c: HCursor): Result[Importance] =
+      Decoder.decodeString
+        .apply(c)
+        .flatMap(s => Importance.fromString(s))
+        .leftMap {
+          case ImportanceParseError(i) =>
+            DecodingFailure(s"$i is not a valid importance level", List())
+        }
+  }
 
   val todoDecoder = jsonOf[F, Todo]
 
