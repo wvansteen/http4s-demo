@@ -1,20 +1,19 @@
 package com.example.http4sdemo.todo
 
+import cats.effect.Async
 import cats.implicits._
+import com.example.http4sdemo.model.Error
+import com.example.http4sdemo.model.Error.TodoNotFoundError
 import doobie._
 import doobie.implicits._
+import doobie.postgres.implicits._
 import doobie.util.transactor.Transactor
 import fs2.Stream
-import cats.effect.Async
-import com.example.http4sdemo.model.Error.TodoNotFoundError
-
-import com.example.http4sdemo.model.Error
 
 class TodoRepository[F[+_]: Async](transactor: Transactor[F]) {
 
-  def unsafeImportanceFromStrong(s: String) =
-    Importance.fromString(s).getOrElse(throw doobie.util.invariant.InvalidEnum[Importance](s))
-  implicit val importanceMeta = Meta[String].timap(unsafeImportanceFromStrong)(_.toString)
+  implicit val importanceMeta: Meta[Importance] =
+    pgEnumStringOpt("importance", s => Importance.fromString(s).toOption, _.toString)
 
   def getTodos: Stream[F, Todo] =
     sql"SELECT id, description, importance FROM todo".query[Todo].stream.transact(transactor)

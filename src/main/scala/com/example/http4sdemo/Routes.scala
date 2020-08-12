@@ -1,12 +1,11 @@
 package com.example.http4sdemo
 
 import cats.effect.Async
-import com.example.http4sdemo.todo.TodoRoutes
+import org.http4s.implicits._
 import org.http4s.rho.swagger.SwaggerSupport
 import org.http4s.rho.swagger.models._
-import org.http4s.implicits._
 import routes.HelloRoutes
-import com.example.http4sdemo.todo.TodoRepository
+import todo.{TodoRepository, TodoRoutes}
 
 object Routes {
 

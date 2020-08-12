@@ -12,11 +12,15 @@ object Importance {
 
   def fromString(s: String): Either[Error, Importance] =
     s match {
-      case "high" => Right(High)
-      case "medium" => Right(Medium)
-      case "low" => Right(Low)
+      case "High" => Right(High)
+      case "Medium" => Right(Medium)
+      case "Low" => Right(Low)
       case _ => Left(ImportanceParseError(s))
     }
+
+  implicit class ImportanceStringExtensions(s: String) {
+    def toImportance(): Either[Error, Importance] = fromString(s)
+  }
 }
 
 case class Todo(id: Option[Long], description: String, importance: Importance)

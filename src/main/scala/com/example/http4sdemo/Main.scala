@@ -1,10 +1,9 @@
 package com.example.http4sdemo
 
-import cats.effect.{ExitCode, IO, IOApp}
-import com.example.http4sdemo.config.LoadConfig
-import cats.effect.Blocker
-import doobie.util.ExecutionContexts
+import cats.effect.{Blocker, ExitCode, IO, IOApp}
+import config.LoadConfig
 import doobie.hikari.HikariTransactor
+import doobie.util.ExecutionContexts
 import org.http4s.rho.swagger.syntax.{io => swaggerIO}
 
 object Main extends IOApp {

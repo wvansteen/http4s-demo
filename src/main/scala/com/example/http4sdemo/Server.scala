@@ -2,15 +2,14 @@ package com.example.http4sdemo
 
 import scala.concurrent.ExecutionContext.global
 
-import cats.effect.ExitCode
-import cats.effect.{ConcurrentEffect, Timer}
-import com.example.http4sdemo.config.ServerConfig
+import cats.effect.{ConcurrentEffect, ExitCode, Timer}
+import config.ServerConfig
+import doobie.util.transactor.Transactor
 import fs2.Stream
+import org.http4s.rho.swagger.SwaggerSupport
 import org.http4s.server.blaze.BlazeServerBuilder
 import org.http4s.server.middleware.Logger
-import doobie.util.transactor.Transactor
-import com.example.http4sdemo.todo.TodoRepository
-import org.http4s.rho.swagger.SwaggerSupport
+import todo.TodoRepository
 
 object Server {
 
