@@ -4,7 +4,7 @@ import cats.effect.Async
 import org.http4s.implicits._
 import org.http4s.rho.swagger.SwaggerSupport
 import org.http4s.rho.swagger.models._
-import routes.HelloRoutes
+import hello.HelloRoutes
 import todo.{TodoRepository, TodoRoutes}
 
 object Routes {

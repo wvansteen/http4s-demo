@@ -1,6 +1,6 @@
-package com.example.http4sdemo.model
+package com.example.http4sdemo.error
 
-sealed abstract class Error extends Product with Serializable
+sealed abstract class Error
 
 object Error {
   final case class ImportanceParseError(importance: String) extends Error

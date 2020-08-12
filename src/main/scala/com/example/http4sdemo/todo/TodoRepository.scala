@@ -2,8 +2,8 @@ package com.example.http4sdemo.todo
 
 import cats.effect.Async
 import cats.implicits._
-import com.example.http4sdemo.model.Error
-import com.example.http4sdemo.model.Error.TodoNotFoundError
+import com.example.http4sdemo.error.Error
+import com.example.http4sdemo.error.Error.TodoNotFoundError
 import doobie._
 import doobie.implicits._
 import doobie.postgres.implicits._

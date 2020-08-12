@@ -1,7 +1,7 @@
 package com.example.http4sdemo.todo
 
-import com.example.http4sdemo.model.Error
-import com.example.http4sdemo.model.Error.ImportanceParseError
+import com.example.http4sdemo.error.Error
+import com.example.http4sdemo.error.Error.ImportanceParseError
 
 sealed trait Importance
 case object High extends Importance

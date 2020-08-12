@@ -1,4 +1,4 @@
-package com.example.http4sdemo.routes
+package com.example.http4sdemo.hello
 
 import cats.effect.Sync
 import org.http4s.rho.RhoRoutes

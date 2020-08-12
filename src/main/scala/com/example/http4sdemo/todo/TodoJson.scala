@@ -2,7 +2,7 @@ package com.example.http4sdemo.todo
 
 import Importance.ImportanceStringExtensions
 import cats.implicits._
-import com.example.http4sdemo.model.Error.ImportanceParseError
+import com.example.http4sdemo.error.Error.ImportanceParseError
 import io.circe.{Decoder, DecodingFailure, Encoder, HCursor}
 
 object TodoJson {
