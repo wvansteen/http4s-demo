@@ -1,11 +1,10 @@
 val CirceVersion = "0.13.0"
-val Http4sVersion = "0.21.6"
+val Http4sVersion = "0.21.13"
 val LogbackVersion = "1.2.3"
-val Specs2Version = "4.9.3"
+val Specs2Version = "4.10.0"
 val RhoVersion = "0.20.0"
-val PureConfigVersion = "0.12.3"
-val H2Version = "1.4.200"
-val DoobieVersion = "0.8.8"
+val PureConfigVersion = "0.14.0"
+val DoobieVersion = "0.9.2"
 
 organization := "com.example"
 name := "http4sdemo"
@@ -22,7 +21,6 @@ libraryDependencies ++= Seq(
   "com.github.pureconfig" %% "pureconfig" % PureConfigVersion,
   "com.github.pureconfig" %% "pureconfig-cats-effect" % PureConfigVersion,
   "org.tpolecat" %% "doobie-core" % DoobieVersion,
-  "org.tpolecat" %% "doobie-h2" % DoobieVersion,
   "org.tpolecat" %% "doobie-hikari" % DoobieVersion,
   "org.tpolecat" %% "doobie-postgres" % DoobieVersion
 )
