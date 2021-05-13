@@ -29,4 +29,3 @@
   - [native-packer](https://github.com/sbt/sbt-native-packager)?
 - dockerized local environment?
   - with [sbt-test-kit](https://github.com/whisklabs/docker-it-scala)?
-- use H2 for local development and exclude it from the jar?
