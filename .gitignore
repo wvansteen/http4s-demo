@@ -1,6 +1,7 @@
 # IDE
 .metals
 .bloop
+http4s-demo.code-workspace
 
 # Build output
 target
